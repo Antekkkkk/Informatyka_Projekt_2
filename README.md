@@ -20,3 +20,12 @@ a współrzędne X,Y,Z kolejno 'xcoord', 'ycoord' i 'zcoord'.
 Na tak przygotowanych plikach można użyć wtyczki. Zaznaczamy wybrane punkty i odpalamy wtyczkę. Jeśli chcemy policzyć przewyższenie, trzeba zaznaczyćdokładnie 2 punkty. Żeby policzyć pole, należy wybrać 3 punkty lub więcej. Jednostki i przyciski podpisane są bezpośrednio w okienku wtyczki. Żeby wyczyścić zawartość wtyczki należy kliknąć reload plugin.
 
 Ważne! W okienku wybierz warstwę należy wybrać warstwę z dodanągeometrią, inaczej liczenie przewyższeń może nie zadziałać. 
+
+Wygląd wtyczki i przykładowy wynik:
+
+![image](https://github.com/Antekkkkk/Informatyka_Projekt_2/assets/129069654/86d54083-f08e-41d5-9278-38d200e265e6)
+
+Znane błędy:
+ - Wtyczka nie działa gdy nazwy kolumn mająinne nazwy, co może się stać gdy punkty sąeksportowane w innym formacie niż dxf. 
+ - przy bardzo dużej ilości punktów kod na pole potrafi dawaćdziwne wyniki
+
