@@ -47,16 +47,14 @@ class Zadanie2Dialog(QtWidgets.QDialog, FORM_CLASS):
         self.licz_przew.clicked.connect(self.przewyzszenie)
         self.licz_pole.clicked.connect(self.pole)
 
-
     def count_selected_features(self):
         number_of_selected_features = len(self.mMapLayerComboBox.currentLayer().selectedFeatures())
-        #self.wynik_pola.setText(str(number_of_selected_features))
-
+        # self.wynik_pola.setText(str(number_of_selected_features))
 
     def przewyzszenie(self):
         warstwa = self.mMapLayerComboBox.currentLayer()
-        #number_of_selected_features = len(self.mMapLayerComboBox.currentLayer().selectedFeatures())
-        wspolrzedne  = warstwa.selectedFeatures()
+        # number_of_selected_features = len(self.mMapLayerComboBox.currentLayer().selectedFeatures())
+        wspolrzedne = warstwa.selectedFeatures()
         Z = []
         lista_nazwa = []
         for kolumna in wspolrzedne:
@@ -71,10 +69,11 @@ class Zadanie2Dialog(QtWidgets.QDialog, FORM_CLASS):
             wybrane = len(Z)
             self.okno_wynikowe.setText(f'Należy wybrać dokładnie 2 punkty. Wybrano {wybrane}.')
         else:
-            wynik = Z[1]-Z[0]
+            wynik = Z[1] - Z[0]
             pkt1 = lista_nazwa[0]
             pkt2 = lista_nazwa[1]
-            self.okno_wynikowe.setText(f'Różnica wysokości między punktami o numerach {pkt1} a {pkt2}  wynosi {wynik} [m]')
+            self.okno_wynikowe.setText(
+                f'Różnica wysokości między punktami o numerach {pkt1} a {pkt2}  wynosi {wynik} [m]')
 
         # except:
         #     for kolumna in wspolrzedne:
@@ -87,28 +86,53 @@ class Zadanie2Dialog(QtWidgets.QDialog, FORM_CLASS):
         #     else:
         #         wynik = Z[1]-Z[0]
         #         self.wynik_wysokosci.setText(str(wynik))
-                
-            
+
     def pole(self):
+        # warstwa = self.mMapLayerComboBox.currentLayer()
+        # wspolrzedne  = warstwa.selectedFeatures()
+        # self.okno_wynikowe.setText('')
+        # Z = []
+        # X = []
+        # Y = []
+        # for kolumna in wspolrzedne:
+        #         z = kolumna["zcoord"]
+        #         Z.append(z)
+        # dl = len(Z)
+        # if dl >= 3:
+        #     punkty = []
+        #     for pkt in wspolrzedne:
+        #         punkty.append(pkt.geometry().asPoint())
+        #     poligon = QgsGeometry.fromPolygonXY([punkty])
+        #     pole = poligon.area()
+        #     self.okno_wynikowe.setText(f'Pole pomiędzy wybranymi {dl} punktami = {pole} m^2')
+        # else:
+        #     self.okno_wynikowe.setText('Należy wybrać 3 lub więcej punktów')
         warstwa = self.mMapLayerComboBox.currentLayer()
-        wspolrzedne  = warstwa.selectedFeatures()
-        self.okno_wynikowe.setText('')
+        wspolrzedne = warstwa.selectedFeatures()
         Z = []
         X = []
         Y = []
+        lista_nazwa = []
         for kolumna in wspolrzedne:
-                z = kolumna["zcoord"]
-                Z.append(z)
+            x = float(kolumna["xcoord"])
+            X.append(x)
+            y = float(kolumna["xcoord"])
+            Y.append(y)
+            z = float(kolumna["zcoord"])
+            Z.append(z)
+            nazwa = kolumna["EntityHandle"]
+            lista_nazwa.append(nazwa)
         dl = len(Z)
+        Dwapola = 0
         if dl >= 3:
-            punkty = []
-            for pkt in wspolrzedne:
-                punkty.append(pkt.geometry().asPoint())
-            poligon = QgsGeometry.fromPolygonXY([punkty])
-            pole = poligon.area()
+            for i in range(1, dl - 1):
+                skladnik = (X[i] + X[i - 1]) * (Y[i] - Y[i - 1])
+                Dwapola = Dwapola + skladnik
+            pole = abs(Dwapola / 2)
             self.okno_wynikowe.setText(f'Pole pomiędzy wybranymi {dl} punktami = {pole} m^2')
         else:
             self.okno_wynikowe.setText('Należy wybrać 3 lub więcej punktów')
+
 
 
 
