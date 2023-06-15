@@ -1,6 +1,9 @@
 # Informatyka_Projekt_2
 W ramach projejktu numer 2 na przedmiocie Informatyka geodezyjna stworzona została wtyczka do programu qgis w języku Python.
 
+Wtyczkę należy wkleić do folderu plugins. Przykładowa ścieżka:
+C:\Users\antek\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins
+
 Działanie wtyczki zaprezentujęna podstawie pliku stworzonego w Autocad, zawierającego kilka punktów. 
 
 Po wrzuceniu pliku dxf do qgisa należy dodaćstrybuty geometrii, tak jak na zdjęciu
@@ -19,7 +22,7 @@ a współrzędne X,Y,Z kolejno 'xcoord', 'ycoord' i 'zcoord'.
 
 Na tak przygotowanych plikach można użyć wtyczki. Zaznaczamy wybrane punkty i odpalamy wtyczkę. Jeśli chcemy policzyć przewyższenie, trzeba zaznaczyćdokładnie 2 punkty. Żeby policzyć pole, należy wybrać 3 punkty lub więcej. Jednostki i przyciski podpisane są bezpośrednio w okienku wtyczki. Żeby wyczyścić zawartość wtyczki należy kliknąć reload plugin.
 
-Ważne! W okienku wybierz warstwę należy wybrać warstwę z dodanągeometrią, inaczej liczenie przewyższeń może nie zadziałać. 
+Ważne! W okienku wybierz warstwę należy wybrać warstwę z dodaną geometrią, inaczej liczenie przewyższeń może nie zadziałać. 
 
 Wygląd wtyczki i przykładowy wynik:
 
@@ -27,5 +30,5 @@ Wygląd wtyczki i przykładowy wynik:
 
 Znane błędy:
  - Wtyczka nie działa gdy nazwy kolumn mająinne nazwy, co może się stać gdy punkty sąeksportowane w innym formacie niż dxf. 
- - przy bardzo dużej ilości punktów kod na pole potrafi dawaćdziwne wyniki
+ - przy bardzo dużej ilości punktów kod na pole potrafi dawać dziwne wyniki
 
