@@ -88,41 +88,22 @@ class Zadanie2Dialog(QtWidgets.QDialog, FORM_CLASS):
         #         self.wynik_wysokosci.setText(str(wynik))
 
     def pole(self):
-        # warstwa = self.mMapLayerComboBox.currentLayer()
-        # wspolrzedne  = warstwa.selectedFeatures()
-        # self.okno_wynikowe.setText('')
-        # Z = []
-        # X = []
-        # Y = []
-        # for kolumna in wspolrzedne:
-        #         z = kolumna["zcoord"]
-        #         Z.append(z)
-        # dl = len(Z)
-        # if dl >= 3:
-        #     punkty = []
-        #     for pkt in wspolrzedne:
-        #         punkty.append(pkt.geometry().asPoint())
-        #     poligon = QgsGeometry.fromPolygonXY([punkty])
-        #     pole = poligon.area()
-        #     self.okno_wynikowe.setText(f'Pole pomiędzy wybranymi {dl} punktami = {pole} m^2')
-        # else:
-        #     self.okno_wynikowe.setText('Należy wybrać 3 lub więcej punktów')
         warstwa = self.mMapLayerComboBox.currentLayer()
         wspolrzedne = warstwa.selectedFeatures()
         Z = []
-        X = []
-        Y = []
-        lista_nazwa = []
         for kolumna in wspolrzedne:
-            x = float(kolumna["xcoord"])
-            X.append(x)
-            y = float(kolumna["xcoord"])
-            Y.append(y)
             z = float(kolumna["zcoord"])
             Z.append(z)
-            nazwa = kolumna["EntityHandle"]
-            lista_nazwa.append(nazwa)
         dl = len(Z)
+        punkty = []
+        for punkt in wspolrzedne:
+            punkty.append(punkt.geometry().asPoint())
+        X = []
+        Y = []
+        for i in punkty:
+            X.append(i[0])
+            Y.append(i[1])
+        self.okno_wynikowe.setText(str(X))
         Dwapola = 0
         if dl >= 3:
             for i in range(1, dl - 1):
@@ -132,7 +113,6 @@ class Zadanie2Dialog(QtWidgets.QDialog, FORM_CLASS):
             self.okno_wynikowe.setText(f'Pole pomiędzy wybranymi {dl} punktami = {pole} m^2')
         else:
             self.okno_wynikowe.setText('Należy wybrać 3 lub więcej punktów')
-
 
 
 
